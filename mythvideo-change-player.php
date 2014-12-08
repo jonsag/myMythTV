@@ -22,7 +22,6 @@ if (! $db_con) {
 
 // select database
 mysql_select_db ( $db_name ) or die ( mysql_error () );
-
 function player_by_file_type($default_player) {
 	$sql = "SELECT * FROM videotypes WHERE f_ignore='0'";
 	$query = mysql_query ( $sql );
@@ -35,7 +34,6 @@ function player_by_file_type($default_player) {
 		}
 	}
 }
-
 function ignored_file_types() {
 	$sql = "SELECT * FROM videotypes WHERE f_ignore='1'";
 	$query = mysql_query ( $sql );
@@ -43,7 +41,6 @@ function ignored_file_types() {
 		echo $row ['extension'] . ", ";
 	}
 }
-
 function default_player_command() {
 	$sql = "SELECT data FROM settings WHERE value='VideoDefaultPlayer'";
 	$result = mysql_query ( $sql );
@@ -54,7 +51,6 @@ function default_player_command() {
 	}
 	return ($default_player);
 }
-
 function set_to_internal() {
 	$sql = "UPDATE videotypes SET use_default='0' WHERE use_default='1' AND f_ignore='0'";
 	$result = mysql_query ( $sql );
@@ -64,7 +60,6 @@ function set_to_internal() {
 		die ( 'Invalid query: ' . mysql_error () );
 	}
 }
-
 function set_to_default() {
 	$sql = "UPDATE videotypes SET use_default='1' WHERE use_default='0' AND f_ignore='0'";
 	$result = mysql_query ( $sql );
@@ -74,7 +69,6 @@ function set_to_default() {
 		die ( 'Invalid query: ' . mysql_error () );
 	}
 }
-
 function toggle() {
 	$sql = "SELECT * FROM videotypes WHERE f_ignore='0'";
 	$query = mysql_query ( $sql );
@@ -100,7 +94,6 @@ function toggle() {
 		}
 	}
 }
-
 function help() {
 	echo "Run this script with an argument\n\n";
 	echo "Valid arguments are:\n";
@@ -110,7 +103,6 @@ function help() {
 	echo "toggle - Switches between Internal and default player for mythvideo\n";
 	echo "help - Shows this text\n\n";
 }
-
 function clear_cache() {
 	echo "\nReloading database...\n";
 	exec ( 'mythutil --message --message_text "Clearing cache and reloading database..." --timeout  5 -v --bcastaddr 192.168.10.6' );
